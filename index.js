@@ -37,6 +37,13 @@ async function run() {
         })
 
 
+        app.get('/search/:category', async (req, res) => {
+            const category = req.params.category;
+            const query = { category: category }
+            const categoryProduct = await productCollection.find(query).toArray()
+            res.send(categoryProduct)
+        })
+
     }
     finally {
 
@@ -46,7 +53,7 @@ async function run() {
 run().catch(console.dir);
 
 app.get('/', (req, res) => {
-    res.send('Hellow from my computer')
+    res.send('My server is running')
 })
 
 app.listen(port, () => {
